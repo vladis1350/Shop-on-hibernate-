@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:include="header :: head"
+      th:with="title='SignUp'"></head>
+<body>
+<div th:include="header :: head-nav" class="navbar navbar-inverse navbar-fixed-top headroom">
+
+</div>
+
+<div class="container">
+
+    <ol class="breadcrumb">
+        <li><a href="home">Home</a></li>
+        <li class="active"> / Registration</li>
+    </ol>
+
+    <div class="row">
+
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">Registration</h1>
+            </header>
+
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="thin text-center">Register a new account</h3>
+                        <p class="text-center text-muted">Do you already have an account? <a href="signIn">Login</a></p>
+                        <hr>
+                        <label class="errMessage" th:text="${successRegistration}"></label><br />
+                        <form action="#" th:action="@{/signUp}" method="POST">
+                            <div class="top-margin">
+                                <label>Login</label>
+                                <label class="errMessage" th:text="${userNameMessage}"></label><br />
+                                <input type="text" class="form-control" name="userName">
+                            </div>
+                            <div class="top-margin">
+                                <label>First Name</label>
+                                <label class="errMessage" th:text="${firstNameMessage}"></label><br />
+                                <input type="text" class="form-control" name="first_name">
+                            </div>
+                            <div class="top-margin">
+                                <label>Last Name</label>
+                                <label class="errMessage" th:text="${lastNameMessage}"></label><br />
+                                <input type="text" class="form-control" name="last_name">
+                            </div>
+                            <div class="top-margin">
+                                <label>Email Address <span class="text-danger">*</span></label>
+                                <label class="errMessage" th:text="${emailMessage}"></label><br />
+                                <input type="text" class="form-control" name="email">
+                            </div>
+
+                            <div class="row top-margin">
+                                <div class="col-sm-6">
+                                    <label>Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password">
+                                    <label class="errMessage" th:text="${passwordMessage}"></label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="confPassword">
+                                    <label class="errMessage" th:text="${confPasswordMessage}"></label>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-lg-8">
+
+                                </div>
+                                <div class="col-lg-4 text-right">
+                                    <button class="btn btn-action" type="submit">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </article>
+        <!-- /Article -->
+
+    </div>
+</div>
+
+<div th:include="header :: scripts"></div>
+</body>
+</html>

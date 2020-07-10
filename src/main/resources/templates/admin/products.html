@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="admin/start_page :: head"
+      th:with="title='ttt'">
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+<nav th:include="admin/start_page :: topbar" class="navbar navbar-default navbar-static-top m-b-0"></nav>
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+<div th:include="admin/start_page :: left-navigate" class="navbar-default sidebar" role="navigation"></div>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title" id="bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Products</h4>
+                    </div>
+                    <div class="col-lg-4 col-sm-8 col-md-8 col-xs-12">
+                        <button type="button" class="btn btn-primary" id="btnNewProduct">Add new product</button>
+                        <button type="button" class="btn btn-danger" id="btnCloseNewProduct">Cancel</button>
+
+                    </div>
+                    <div class="col-lg-4 col-sm-8 col-md-8 col-xs-12">
+                        <div class="col-sm">
+                            <a href="discount" class="btn btn-primary">Discount for Category</a>
+                        </div><br/>
+                    </div>
+                    <div class="blockNewProduct" align="center">
+                        <br/><br/>
+                        <br/>
+                        <form action="#" th:action="@{/saveProduct}" method="post">
+                            <table border="0" cellpadding="10" class="new-product">
+                                <tr>
+                                    <td style="width: 150px;">Product Name:</td>
+                                    <td>
+                                        <span style="font-size: 14px; color: #FF1C19;" th:text="${errProductName}"></span><br/>
+                                        <input class="form-control" type="text" name="productName"/>
+                                    </td>
+                                    <td style="width: 100px;">Price:</td>
+                                    <td>
+                                        <span style="font-size: 14px; color: #FF1C19;" th:text="${errProductPrice}"></span><br/>
+                                        <input class="form-control" type="text" name="price"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">Category:</td>
+                                    <td>
+                                        <select class="form-control" name="category">
+                                            <option th:each="category : ${categoryList}"
+                                                    th:value="${category.id}"
+                                                    th:text="${category.name}">
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <td style="width: 100px;">Discount:</td>
+                                    <td>
+                                        <span style="font-size: 14px; color: #FF1C19;" th:text="${errProductDiscount}"></span><br/>
+                                        <input class="form-control" type="text" name="discount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">Description:</td>
+                                    <td colspan="2">
+                                        <label>
+                                            <textarea rows="5" cols="60" name="description"></textarea>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Product Table</h3>
+                            <span style="font-size: 16px; color: green; text-align: center;" th:text="${successMessage}"></span>
+                            <span style="font-size: 16px; color: #FF1C19; text-align: center;" th:text="${errorMessage}"></span>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Category</th>
+                                            <th>Discount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="product : ${productList}">
+                                        <td th:text="${product.id}">#</td>
+                                        <td th:text="${product.name}">Name</td>
+                                        <td th:text="${product.price}">Price</td>
+                                        <td th:text="${product.category.getName()}">Category</td>
+                                        <td th:text="${product.discount}">Discount</td>
+                                        <td>
+                                            <a th:href="@{'/admin/editProduct/' + ${product.id}}">Edit</a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a th:href="@{'/deleteProduct/' + ${product.id}}">Delete</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by wrappixel.com</footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+<div th:include="admin/start_page :: scripts"></div>
+    <script>
+        $("#btnCloseNewProduct").click(function() {
+            $(".blockNewProduct").fadeOut(500);
+            $("#btnNewProduct").css({display:"block"});
+            $(this).css({display:"none"});
+        });
+
+        $("#btnNewProduct").click(function () {
+            $(".blockNewProduct").fadeIn(500);
+            $("#btnCloseNewProduct").css({display:"block"});
+            $(this).css({display:"none"});
+        });
+
+
+
+    </script>
+</body>
+
+</html>
