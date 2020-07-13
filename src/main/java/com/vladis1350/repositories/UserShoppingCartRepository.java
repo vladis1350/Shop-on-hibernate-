@@ -20,11 +20,11 @@ public interface UserShoppingCartRepository extends JpaRepository<UserShoppingCa
     List<UserShoppingCart> findAll();
 
     @Query(value = "SELECT usc FROM UserShoppingCart usc WHERE usc.pk.shoppingCarts.id=?1")
-    List<UserShoppingCart> findAllById(Long id);
+    List<UserShoppingCart> findAllByIdShoppingCart(Long id);
 
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM UserShoppingCart usc WHERE usc.pk.shoppingCarts.id=?1 and usc.pk.product.id=?2")
-    void deleteProductFromCart(Long idCart, Long idProduct);
+    UserShoppingCart deleteProductFromCart(Long idCart, Long idProduct);
 
 }

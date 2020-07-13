@@ -128,7 +128,7 @@ class ProductServiceTest {
         productList.add(product);
         productList.add(productTwo);
         given(this.productRepository.saveAll(productList)).willReturn(productList);
-        List<Product> productList1 = productService.saveAll(productList);
+        List<Product> productList1 = productService.saveProductAll(productList);
         assertThat(productList.size() == productList1.size());
     }
 }

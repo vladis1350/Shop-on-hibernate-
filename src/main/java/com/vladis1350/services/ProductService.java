@@ -33,16 +33,15 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        Optional<Product> prod = productRepository.findById(id);
-        return prod.orElse(null);
+        return productRepository.findProductById(id);
     }
 
     public Product findProductByName(String name) {
         return productRepository.findProductByName(name);
     }
 
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+    public Product deleteProduct(Long id) {
+        return productRepository.deleteProductById(id);
     }
 
     public List<Product> findAllByCategoryName(String category) {
@@ -53,10 +52,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void updateDiscountByCategory(Long idCategory, BigDecimal discount) {
-        String query = "Update products SET discount=:discount WHERE category_id=:id";
-        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("discount", discount)
-                .addValue("id", idCategory);
-        namedParameterJdbcTemplate.update(query, parameterSource);
+    public int updateDiscountByCategory(Long idCategory, BigDecimal discount) {
+        return productRepository.updateDiscountByCategory(idCategory, discount);
+    }
+
+    public List<Product> saveProductAll(List<Product> productList) {
+        return productRepository.saveAll(productList);
     }
 }

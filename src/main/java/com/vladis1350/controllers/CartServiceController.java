@@ -84,7 +84,7 @@ public class CartServiceController {
         User user = userService.getCurrentAuthenticationUser();
         Long idShoppingCart = cartService.findShoppingCartByUser(user).getId();
         mod.addObject(SuccessConstants.IS_AUTHENTICATED, userAccessService.isCurrentUserAuthenticated());
-        mod.addObject("userProductList", userShoppingCartService.findAllById(idShoppingCart));
+        mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
         return mod;
     }
 
@@ -95,7 +95,7 @@ public class CartServiceController {
         User user = userService.getCurrentAuthenticationUser();
         Long idShoppingCart = cartService.findShoppingCartByUser(user).getId();
         userShoppingCartService.remove(idCart, idProduct);
-        mod.addObject("userProductList", userShoppingCartService.findAllById(idShoppingCart));
+        mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
         mod.setViewName(Pages.REDIRECT + "shopping_cart");
         return mod;
     }

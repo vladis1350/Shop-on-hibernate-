@@ -59,7 +59,7 @@ class CategoryServiceTest {
 
     @Test
     void findCategoryById() {
-        given(this.categoryRepository.findCategoryById(any()))
+        given(this.categoryRepository.findCategoriesById(any()))
                 .willReturn(category);
         Category categoryTest = categoryService.findCategoryById(9L);
         assertThat(categoryTest.getId()).isEqualTo(9);
@@ -67,7 +67,7 @@ class CategoryServiceTest {
 
     @Test
     void findCategoryByName() {
-        given(this.categoryRepository.findCategoryByName(any()))
+        given(this.categoryRepository.findCategoriesByName(any()))
                 .willReturn(category);
         Category categoryTest = categoryService.findCategoryByName("Milk category");
         assertThat(categoryTest.getName()).isNotEqualTo("Milk category");

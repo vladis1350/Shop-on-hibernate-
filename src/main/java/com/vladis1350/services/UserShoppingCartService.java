@@ -39,8 +39,8 @@ public class UserShoppingCartService {
         cartRepository.deleteById(id);
     }
 
-    public void remove(Long idCart, Long idProduct) {
-        cartRepository.deleteProductFromCart(idCart, idProduct);
+    public UserShoppingCart remove(Long idCart, Long idProduct) {
+        return cartRepository.deleteProductFromCart(idCart, idProduct);
     }
 
 
@@ -48,8 +48,8 @@ public class UserShoppingCartService {
         return cartRepository.findAll();
     }
 
-    public List<UserShoppingCart> findAllById(Long id) {
-        return cartRepository.findAllById(id);
+    public List<UserShoppingCart> findAllByIdShoppingCart(Long id) {
+        return cartRepository.findAllByIdShoppingCart(id);
     }
 
     public int getQuantityProductsInUserShoppingCart(Long idProduct, Long idCart) {
