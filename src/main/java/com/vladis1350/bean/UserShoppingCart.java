@@ -1,10 +1,7 @@
 package com.vladis1350.bean;
 
 import com.vladis1350.bean.embedded.UserShoppingCartId;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +20,8 @@ import java.math.BigDecimal;
 public class UserShoppingCart  implements Serializable {
 
     @EmbeddedId
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private UserShoppingCartId pk;
 
     @Column(name = "quantity_product")

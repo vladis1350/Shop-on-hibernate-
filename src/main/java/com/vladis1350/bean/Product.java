@@ -7,8 +7,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,6 +36,8 @@ public class Product implements Serializable {
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product", cascade=CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<UserShoppingCart> userShoppingCart;
 
 }

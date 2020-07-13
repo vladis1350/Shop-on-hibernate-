@@ -2,16 +2,14 @@ package com.vladis1350.bean.embedded;
 
 import com.vladis1350.bean.Product;
 import com.vladis1350.bean.ShoppingCarts;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
