@@ -1,10 +1,8 @@
 package com.vladis1350.auth.bean;
 
+import com.vladis1350.bean.Order;
 import com.vladis1350.bean.ShoppingCarts;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -59,6 +57,11 @@ public class User implements Serializable {
 
     @OneToOne(mappedBy = "user")
     private ShoppingCarts shoppingCarts;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Order> orders;
 
     public String getAllRoles() {
         return roles.stream()

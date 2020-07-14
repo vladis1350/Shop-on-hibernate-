@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product deleteProductById(Long id);
 
-    @Query(value = "Update Products p SET p.discount=?2 WHERE p.category.id=?1")
+    @Query(value = "Update Product p SET p.discount=?2 WHERE p.category.id=?1")
     int updateDiscountByCategory(Long idCategory, BigDecimal discount);
     
 }
