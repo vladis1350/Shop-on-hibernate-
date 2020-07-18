@@ -60,11 +60,6 @@ public class User implements Serializable {
     @OneToOne(mappedBy = "user")
     private ShoppingCarts shoppingCarts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Set<Order> orders;
-
     public String getAllRoles() {
         return roles.stream()
                 .map(role -> role.getRoleName().name())

@@ -24,4 +24,8 @@ public class ShoppingCartService {
     public boolean findShoppingCartByIdUserBool(User user) {
         return shoppingCartRepository.findShoppingCartByUser(user) == null;
     }
+
+    public ShoppingCarts findShoppingCartByUserAndIsActiveTrue(User user) {
+        return shoppingCartRepository.findShoppingCartByUserAndIsActiveTrue(user);
+    }
 }

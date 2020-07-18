@@ -20,11 +20,19 @@ public class ShoppingCarts implements Serializable {
     @Column(name = "id_shoppingCart")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", unique = true)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private User user;
+
+    @Column(name = "active")
+    private Boolean isActive;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingCarts", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Order> orders;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.shoppingCarts", cascade=CascadeType.ALL)
     @ToString.Exclude

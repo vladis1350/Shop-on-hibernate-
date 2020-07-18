@@ -1,6 +1,5 @@
 package com.vladis1350.bean;
 
-import com.vladis1350.auth.bean.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +22,8 @@ public class Order implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "id_shoppingCart")
+    private ShoppingCarts shoppingCarts;
 
     @Column(name = "date_order")
     private String date;

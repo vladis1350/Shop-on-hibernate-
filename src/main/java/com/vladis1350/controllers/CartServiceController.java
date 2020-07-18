@@ -42,25 +42,26 @@ public class CartServiceController {
     private UserAccessService userAccessService;
 
     @PostMapping(value = Http.ADD_TO_CART + "/{id}")
-    public String addProductToCart (
+    public String addProductToCart(
             @ModelAttribute("countOfGoods") Integer count,
             @PathVariable(name = "id") Long id) {
         User user = userService.getCurrentAuthenticationUser();
-        if (cartService.findShoppingCartByIdUserBool(user)) {
+        if (cartService.findShoppingCartByUserAndIsActiveTrue(user) == null) {
             ShoppingCarts shoppingCart = ShoppingCarts.builder()
                     .user(user)
+                    .isActive(true)
                     .build();
             cartService.saveShoppingCart(shoppingCart);
         }
         Product product = productService.getProductById(id);
-        ShoppingCarts carts = cartService.findShoppingCartByUser(user);
+        ShoppingCarts carts = cartService.findShoppingCartByUserAndIsActiveTrue(user);
         Long idShoppingCart = carts.getId();
         UserShoppingCartId shoppingCartId = UserShoppingCartId.builder()
                 .shoppingCarts(carts)
                 .product(product).build();
         if (userShoppingCartService.getByProductId(product.getId(), idShoppingCart) != null) {
             Integer quantityInBasket = userShoppingCartService.getQuantityProductsInUserShoppingCart(product.getId(), idShoppingCart);
-            int totalQuantity = count+quantityInBasket;
+            int totalQuantity = count + quantityInBasket;
             UserShoppingCart shoppingCart = UserShoppingCart.builder()
                     .pk(shoppingCartId)
                     .quantityProduct(totalQuantity)
@@ -82,7 +83,14 @@ public class CartServiceController {
     public ModelAndView showUserShoppingCart() {
         ModelAndView mod = new ModelAndView("shopping_cart");
         User user = userService.getCurrentAuthenticationUser();
-        Long idShoppingCart = cartService.findShoppingCartByUser(user).getId();
+        if (cartService.findShoppingCartByUserAndIsActiveTrue(user) == null) {
+            ShoppingCarts newCart = ShoppingCarts.builder()
+                    .user(user)
+                    .isActive(true)
+                    .build();
+            cartService.saveShoppingCart(newCart);
+        }
+        Long idShoppingCart = cartService.findShoppingCartByUserAndIsActiveTrue(user).getId();
         mod.addObject(SuccessConstants.IS_AUTHENTICATED, userAccessService.isCurrentUserAuthenticated());
         mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
         return mod;

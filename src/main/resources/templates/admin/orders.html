@@ -62,8 +62,8 @@
                                     <tbody>
                                     <tr th:each="order : ${orderList}">
                                         <td th:text="${order.id}">#</td>
-                                        <td th:text="${order.user.getLastName() + ' ' + order.user.getFirstName()}">Buyer</td>
-                                        <td th:text="${order.user.getEmail()}">Email</td>
+                                        <td th:text="${order.shoppingCarts.getUser().getLastName() + ' ' + order.shoppingCarts.getUser().getFirstName()}">Buyer</td>
+                                        <td th:text="${order.shoppingCarts.getUser().getEmail()}">Email</td>
                                         <td th:text="${order.date}">Date order</td>
                                         <td th:text="${order.statusOrder.getStatusName().getInfo()}">Status</td>
 <!--                                        <td>-->
