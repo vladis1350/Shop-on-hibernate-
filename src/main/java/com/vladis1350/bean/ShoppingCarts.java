@@ -22,6 +22,8 @@ public class ShoppingCarts implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", unique = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.shoppingCarts", cascade=CascadeType.ALL)

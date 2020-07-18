@@ -4,6 +4,7 @@
       th:with="title='Shopping Cart'"></head>
 <body>
 <div th:include="header :: head-nav" class="navbar navbar-inverse navbar-fixed-top headroom"></div>
+
 <table class="table table-striped table-user-product">
     <thead>
     <tr>
@@ -14,6 +15,16 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
+        <td colspan="2">
+            <span style="font-size: 14px; color: green;" th:text="${orderMessage}"></span><br/>
+        </td>
+        <td colspan="2">
+            <form th:action="@{/checkoutOrder}" method="post">
+                <button type="submit">CHECKOUT</button>
+            </form>
+        </td>
+    </tr>
     <tr th:each="userProduct : ${userProductList}">
         <td th:text="${userProduct.pk.product.getName()}">Product</td>
         <td th:text="${userProduct.pk.product.getPrice()}">Price</td>

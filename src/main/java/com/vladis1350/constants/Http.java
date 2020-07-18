@@ -4,6 +4,9 @@ public class Http {
 
     public static final String DELETE_CATEGORY = "deleteCategory";
     public static final String EDIT_CATEGORY = "editCategory";
+    public static final String USERS = "/admin/users";
+    public static final String CATEGORIES = "/admin/categories";
+    public static final String ORDERS = "/admin/orders";
 
     private Http(){}
 

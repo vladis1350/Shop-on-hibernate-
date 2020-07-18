@@ -1,6 +1,7 @@
 package com.vladis1350.admin.controllers;
 
 import com.vladis1350.auth.repositories.UserRepository;
+import com.vladis1350.constants.Http;
 import com.vladis1350.services.CategoryService;
 import com.vladis1350.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,14 @@ public class AdminViewController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/admin/users")
+    @GetMapping(value = Http.USERS)
     public ModelAndView showAdminPanel() {
         ModelAndView mod = new ModelAndView("admin/users");
         mod.addObject("userList", userRepository.findAll());
         return mod;
     }
 
-    @GetMapping("/admin/categories")
+    @GetMapping(value = Http.CATEGORIES)
     public ModelAndView showCategoryListInAdminPanel() {
         ModelAndView mod = new ModelAndView();
         mod.addObject("categoryList", categoryService.findAllCategories());

@@ -20,8 +20,8 @@ public class StatusOrder {
     private Long id;
 
     @Column(name = "status_name")
-    @NotEmpty(message = "Пожалуйста, введите название статуса заказа.")
-    private String statusName;
+    @Enumerated(value = EnumType.STRING)
+    private OrderStatuses statusName;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "statusOrder", cascade = CascadeType.ALL)
     @ToString.Exclude

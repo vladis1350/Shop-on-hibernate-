@@ -20,7 +20,7 @@ public class CategoryServiceController {
     @GetMapping(value = Http.NEW_CATEGORY)
     public String showNewCategoryForm(Model model) {
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAllCategories());
-        return Pages.CATEGORY;
+        return Pages.CATEGORY_PAGE;
     }
 
     @PostMapping(value = Http.SAVE_CATEGORY)

@@ -62,7 +62,7 @@ public class ProductManagementController {
             mod.addObject("errorMessage", "Продукт с таким именем уже сужествует!");
             mod.addObject(EntityConstant.PRODUCTS, productService.findAllProducts());
             mod.addObject(EntityConstant.CATEGORIES, categoryService.findAllCategories());
-            mod.setViewName(Pages.PRODUCTS);
+            mod.setViewName(Pages.PRODUCTS_PAGE);
             return mod;
         }
         if (!ProductValidator.validateName(productName)) {
