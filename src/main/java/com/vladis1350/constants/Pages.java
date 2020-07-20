@@ -3,6 +3,7 @@ package com.vladis1350.constants;
 public class Pages {
 
     public static final String ORDERS_PAGE = "admin/orders";
+    public static final String SHOPPING_CART = "shopping_cart";
 
     private Pages() {
     }

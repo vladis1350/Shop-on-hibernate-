@@ -55,7 +55,7 @@ public class ProductManagementController {
                 .price(price)
                 .discount(discount)
                 .category(category)
-//                .description(description)
+                .description(description)
                 .build();
         Product newProduct = productService.findProductByName(productName);
         if (newProduct != null) {
@@ -80,7 +80,7 @@ public class ProductManagementController {
         }
         mod.addObject(EntityConstant.PRODUCTS, productService.findAllProducts());
         mod.addObject(EntityConstant.CATEGORIES, categoryService.findAllCategories());
-        mod.setViewName("/admin/products");
+        mod.setViewName(Pages.PRODUCTS_PAGE);
         return mod;
     }
 
