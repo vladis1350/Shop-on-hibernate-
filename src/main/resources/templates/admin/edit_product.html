@@ -72,7 +72,7 @@
                                     <select class="form-control" th:field="*{category}">
                                         <option th:each="category : ${categoryList}"
                                                 th:value="${category.id}"
-                                                th:text="${category.nameCategory}">
+                                                th:text="${category.name}">
                                         </option>
                                     </select>
                                 </td>
