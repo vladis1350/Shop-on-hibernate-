@@ -37,4 +37,24 @@ public class OrderService {
         order.setStatusOrder(statusOrder);
         return orderRepository.save(order);
     }
+
+    public Order findOrderById(Long orderId) {
+        return orderRepository.findOrderById(orderId);
+    }
+
+    public void editOrderStatus(OrderStatuses statusName, Long orderId) {
+        StatusOrder statusOrder = statusRepository.findByStatusName(statusName);
+        if (statusOrder == null) {
+            StatusOrder orderS = StatusOrder.builder()
+                    .statusName(statusName)
+                    .build();
+            statusOrder = statusRepository.save(orderS);
+        }
+        Optional<Order> orderOp = orderRepository.findById(orderId);
+        if (orderOp.isPresent()) {
+            Order order = orderOp.get();
+            order.setStatusOrder(statusOrder);
+            orderRepository.save(order);
+        }
+    }
 }

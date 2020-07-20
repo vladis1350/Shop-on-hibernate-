@@ -3,11 +3,10 @@ package com.vladis1350.bean;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
-@Data
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,7 +18,7 @@ public class StatusOrder {
     @Column(name = "id_status")
     private Long id;
 
-    @Column(name = "status_name")
+    @Column(name = "status_name", unique = true)
     @Enumerated(value = EnumType.STRING)
     private OrderStatuses statusName;
 
@@ -27,4 +26,8 @@ public class StatusOrder {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Order> orders;
+
 }
+
+
+

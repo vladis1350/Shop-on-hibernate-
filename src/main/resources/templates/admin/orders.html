@@ -57,6 +57,7 @@
                                             <th>Email</th>
                                             <th>Date order</th>
                                             <th>Status</th>
+                                            <th>Change status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -66,11 +67,27 @@
                                         <td th:text="${order.shoppingCarts.getUser().getEmail()}">Email</td>
                                         <td th:text="${order.date}">Date order</td>
                                         <td th:text="${order.statusOrder.getStatusName().getInfo()}">Status</td>
-<!--                                        <td>-->
-<!--                                            <a th:href="@{'/editCategory/' + ${category.id}}">Edit</a>-->
-<!--                                            &nbsp;&nbsp;&nbsp;&nbsp;-->
-<!--                                            <a th:href="@{'/deleteCategory/' + ${category.id}}">Delete</a>-->
-<!--                                        </td>-->
+                                        <td>
+                                            <form action="#" th:action="@{/admin/changeOrderStatus}" method="post">
+                                                <div class="dropdown">
+                                                    <a class="text-dark dropdown-toggle" href="#" id="dropdownMenu"
+                                                       data-toggle="dropdown"
+                                                       aria-haspopup="true" aria-expanded="false">
+                                                        Change status
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                                        <button class="dropdown-item" type="submit" name="statusName"
+                                                                th:each="status : ${orderStatusList}"
+                                                                th:value="${status}"
+                                                                th:text="${status}">
+                                                        </button>
+                                                        <label>
+                                                            <input type="text" style="display: none;" th:value="${order.id}" name="orderId"/>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
