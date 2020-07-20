@@ -42,6 +42,19 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void addRoleToUser(UserRoles userRole, Long userId) {                            //
+        Role role = roleRepository.findByRoleName(userRole);
+        if (role == null) {
+            role = roleRepository.save(new Role(null, userRole));
+        }//
+        Optional<User> userOp = userRepository.findById(userId);                            //
+        if (userOp.isPresent()) {                                                           //
+            User user = userOp.get();                                                       //
+            user.getRoles().add(role);                                                      //
+            userRepository.save(user);                                                      //
+        }                                                                                   //
+    }
+
     public User updateUser(User user) {
         user = userRepository.save(user);
         return user;
@@ -71,5 +84,9 @@ public class UserService {
     public static User erasePasswordDataBeforeResponse(User user) {
         user.setPassword("");
         return user;
+    }
+
+    public User findUserById(Long userId) {
+        return userRepository.findUserById(userId);
     }
 }

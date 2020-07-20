@@ -4,6 +4,7 @@ public class Pages {
 
     public static final String ORDERS_PAGE = "admin/orders";
     public static final String SHOPPING_CART = "shopping_cart";
+    public static final String ADMIN_USERS = "admin/users";
 
     private Pages() {
     }

@@ -1,5 +1,7 @@
 package com.vladis1350.admin.controllers;
 
+import com.vladis1350.auth.bean.UserRoles;
+import com.vladis1350.auth.repositories.RoleRepository;
 import com.vladis1350.auth.repositories.UserRepository;
 import com.vladis1350.constants.Http;
 import com.vladis1350.services.CategoryService;
@@ -16,7 +18,7 @@ public class AdminViewController {
     private UserRepository userRepository;
 
     @Autowired
-    private ProductService productService;
+    private RoleRepository roleRepository;
 
     @Autowired
     private CategoryService categoryService;
@@ -25,6 +27,7 @@ public class AdminViewController {
     public ModelAndView showAdminPanel() {
         ModelAndView mod = new ModelAndView("admin/users");
         mod.addObject("userList", userRepository.findAll());
+        mod.addObject("userRolesList", UserRoles.values());
         return mod;
     }
 
