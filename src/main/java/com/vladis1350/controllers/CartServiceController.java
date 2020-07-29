@@ -8,6 +8,7 @@ import com.vladis1350.bean.embedded.UserShoppingCartId;
 import com.vladis1350.bean.Product;
 import com.vladis1350.bean.ShoppingCarts;
 import com.vladis1350.bean.UserShoppingCart;
+import com.vladis1350.constants.EntityConstant;
 import com.vladis1350.constants.Http;
 import com.vladis1350.constants.Pages;
 import com.vladis1350.constants.SuccessConstants;
@@ -101,7 +102,7 @@ public class CartServiceController {
         }
         Long idShoppingCart = cartService.findShoppingCartByUserAndIsActiveTrue(user).getId();
         mod.addObject(SuccessConstants.IS_AUTHENTICATED, userAccessService.isCurrentUserAuthenticated());
-        mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
+        mod.addObject(EntityConstant.USER_PRODUCT_LIST, userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
         return mod;
     }
 
@@ -110,7 +111,8 @@ public class CartServiceController {
         ModelAndView mod = new ModelAndView();
         mod.addObject(SuccessConstants.IS_AUTHENTICATED, userAccessService.isCurrentUserAuthenticated());
         User user = userService.getCurrentAuthenticationUser();
-        Long idShoppingCart = cartService.findShoppingCartByUserAndIsActiveTrue(user).getId();;
+        Long idShoppingCart = cartService.findShoppingCartByUserAndIsActiveTrue(user).getId();
+        mod.addObject(EntityConstant.USER_PRODUCT_LIST, userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
 
         ShoppingCarts shoppingCart = cartService.findShoppingCartByUserAndIsActiveTrue(user);
 
@@ -119,9 +121,8 @@ public class CartServiceController {
                 .shoppingCarts(shoppingCart)
                 .date(currentDate.format(new Date()))
                 .build();
-        if (userShoppingCartService.findAllByIdShoppingCart(shoppingCart.getId()).size() == 0) {
+        if (userShoppingCartService.findAllByIdShoppingCart(shoppingCart.getId()).isEmpty()) {
             mod.addObject("orderMessage", "Корзина пуста! Для начала добавьте товары в корзину.");
-            mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
             mod.setViewName(Pages.SHOPPING_CART);
             return mod;
         }
@@ -130,7 +131,6 @@ public class CartServiceController {
             cartService.saveShoppingCart(shoppingCart);
             mod.addObject("orderMessage", "Заказ отправлен на обработку, с вами свяжется администратор для уточнения заказа.");
         }
-        mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
         mod.setViewName(Pages.SHOPPING_CART);
         return mod;
     }
@@ -142,7 +142,7 @@ public class CartServiceController {
         User user = userService.getCurrentAuthenticationUser();
         Long idShoppingCart = cartService.findShoppingCartByUser(user).getId();
         userShoppingCartService.remove(idCart, idProduct);
-        mod.addObject("userProductList", userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
+        mod.addObject(EntityConstant.USER_PRODUCT_LIST, userShoppingCartService.findAllByIdShoppingCart(idShoppingCart));
         mod.setViewName(Pages.REDIRECT + "shopping_cart");
         return mod;
     }

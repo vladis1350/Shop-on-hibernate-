@@ -1,7 +1,5 @@
 package com.vladis1350.admin.controllers;
 
-import com.vladis1350.auth.bean.Role;
-import com.vladis1350.auth.bean.User;
 import com.vladis1350.auth.bean.UserRoles;
 import com.vladis1350.auth.services.UserService;
 import com.vladis1350.constants.Pages;
@@ -10,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Optional;
 
 @Controller
 public class UserManagementController {

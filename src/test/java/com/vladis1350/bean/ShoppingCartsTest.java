@@ -45,7 +45,7 @@ class ShoppingCartsTest {
         Assert.assertEquals(shoppingCartThree, shoppingCartFour);
 
         Assert.assertNotEquals(shoppingCartOne, shoppingCartThree);
-        userTwo.setId(166L);
+        shoppingCartThree.setId(166L);
         shoppingCartFour.setUser(userTwo);
         Assert.assertNotEquals(shoppingCartThree, shoppingCartFour);
     }

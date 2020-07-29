@@ -47,40 +47,21 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Orders Table</h3>
+                            <h3 class="box-title" th:text="${buyer.lastName + ' ' + buyer.firstName}"></h3>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Buyer</th>
-                                            <th>Email</th>
-                                            <th>Date order</th>
-                                            <th>Status</th>
-                                            <th>Change status</th>
+                                            <th>Product</th>
+                                            <th>Count</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="order : ${orderList}">
-                                            <td th:text="${order.id}">#</td>
-                                            <td><a th:href="@{'/admin/userOrder/' + ${order.id}}" th:text="${order.shoppingCarts.getUser().getLastName() + ' ' + order.shoppingCarts.getUser().getFirstName()}"></a></td>
-                                            <td th:text="${order.shoppingCarts.getUser().getEmail()}">Email</td>
-                                            <td th:text="${order.date}">Date order</td>
-                                            <td th:text="${order.statusOrder.getStatusName().getInfo()}">Status</td>
-                                            <td>
-                                                <form action="#" th:action="@{/admin/changeOrderStatus}" method="post">
-                                                    <select class="select_send_ajax" name="statusName">
-                                                        <option disabled selected value>----- Select -----</option>
-                                                        <option th:each="status : ${orderStatusList}"
-                                                                th:value="${status}"
-                                                                th:text="${status.getInfo()}">
-                                                        </option>
-                                                    </select>
-                                                    <label>
-                                                        <input type="text" style="display: none;" th:value="${order.id}" name="orderId"/>
-                                                    </label>
-                                                </form>
-                                            </td>
+                                    <tr th:each="order : ${orderCart}">
+                                        <td th:text="${order.getPk().getProduct().getName()}">#</td>
+                                        <td th:text="${order.getQuantityProduct()}"></td>
+                                        <td th:text="${order.getSummOrder()}">Email</td>
                                     </tr>
                                     </tbody>
                                 </table>

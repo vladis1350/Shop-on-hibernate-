@@ -3,6 +3,7 @@ package com.vladis1350.bean;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -11,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Table(name = "statuses")
-public class StatusOrder {
+public class StatusOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

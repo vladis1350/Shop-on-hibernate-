@@ -3,16 +3,11 @@ package com.vladis1350.services;
 import com.vladis1350.bean.Product;
 import com.vladis1350.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -55,10 +50,6 @@ public class ProductService {
 
     public List<Product> findAllProducts() {
         return productRepository.findAll();
-    }
-
-    public List<Product> sortingProducts() {
-        return productRepository.findAll(Sort.by(""));
     }
 
     public int updateDiscountByCategory(Long idCategory, BigDecimal discount) {

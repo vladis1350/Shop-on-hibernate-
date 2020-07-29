@@ -12,6 +12,10 @@ public class EntityConstant {
     public static final String UNIT_PRODUCT = "product";
     public static final String UNIT_CART = "basket";
 
+    public static final String USER_PRODUCT_LIST = "userProductList";
+
+
+
     public static final String ENTITY_ID_PRODUCT = "id_product";
 
 

@@ -7,6 +7,7 @@ public class Http {
     public static final String USERS = "/admin/users";
     public static final String CATEGORIES = "/admin/categories";
     public static final String ORDERS = "/admin/orders";
+    public static final String USER_ORDER = "/admin/userOrder";
 
     private Http(){}
 

@@ -1,6 +1,5 @@
 package com.vladis1350.auth.bean;
 
-import com.vladis1350.bean.Order;
 import com.vladis1350.bean.ShoppingCarts;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
